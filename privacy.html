@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ComeHelp privacy policy</title>
+<link rel="icon" href="icon-512.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div class="in"><img src="icon-512.png" alt=""><a href="./">ComeHelp</a>
+<nav><a href="help.html">Help</a><a href="privacy.html">Privacy</a><a href="delete-account.html">Delete account</a></nav></div></header>
+<main>
+<h1>Privacy policy</h1>
+<p>Last updated: 27 October 2026. This policy covers the ComeHelp Android app (com.comehelp.app) and its service, made by Amrania Labs ("we"). Contact: <a href="mailto:privacy@amrania.com">privacy@amrania.com</a>.</p>
+
+<h2>In short</h2>
+<ul>
+<li>ComeHelp exists for one thing: warning the people in your group of a danger, and showing where it is.</li>
+<li>We collect only what that needs. No advertising, no analytics, no tracking, and we never sell or share data for marketing.</li>
+<li>Your location is read only when you open the alert screen or send an alert, and is shared only with your group, inside an alert.</li>
+<li>You can delete your account and data at any time, in the app or by email.</li>
+</ul>
+
+<h2>What we collect, and why</h2>
+<table>
+<tr><th>Data</th><th>Why</th><th>Who sees it</th></tr>
+<tr><td>Your name, phone number and (optionally) where you live</td><td>So the members of your group know who sends an alert, can call you, and so the admin can approve you</td><td>Your group's admins; the other members see your name and place with your alerts, and your number only if you allow it (or for the no-internet SMS backup, see below)</td></tr>
+<tr><td>Precise location (GPS), only when you send an alert</td><td>To show the place of the danger on a map</td><td>The members of your group, inside that alert</td></tr>
+<tr><td>Alerts you send (type, note, time, place), your "I'm coming" answers, and reports</td><td>So the group sees what is happening and who is coming</td><td>The members of your group; reports also reach us, to stop abuse</td></tr>
+<tr><td>A notification token for your phone and your language</td><td>To ring your phone and write alerts in your language</td><td>Our server and Google Firebase Cloud Messaging, which delivers the alarm</td></tr>
+<tr><td>Your group's member list (names and numbers), kept on your phone</td><td>So the alert can go out by SMS when there is no internet</td><td>Only your phone; SMS go through your mobile operator and are charged as normal SMS</td></tr>
+</table>
+<p>The app reads incoming SMS only to recognise an alert texted by a member of your group (it looks for ComeHelp's marker and a sender in your group's list). It does not store, upload or read any other message.</p>
+<p>Your position is also shown on your own screen against map images downloaded from Esri (World Imagery); those requests carry only the map area, not your identity.</p>
+
+<h2>Where the data is kept, and by whom</h2>
+<ul>
+<li><b>Cloudflare</b> (Workers and D1) hosts our server and database.</li>
+<li><b>Google Firebase Cloud Messaging</b> delivers the alarm to phones.</li>
+<li><b>Microsoft Azure Speech</b> turns the text of an alert into speech, when the read-aloud alarm is on; it receives the alert's text only.</li>
+</ul>
+<p>These providers process data on our behalf and may store it outside your country. Everything is sent over encrypted connections (HTTPS). Each phone holds a private key; our server keeps only a hash of it.</p>
+
+<h2>How long we keep it</h2>
+<ul>
+<li>Alerts, answers and reports are deleted automatically after 12 months. The app shows only the last 24 hours.</li>
+<li>Your profile is kept while you are in a group. When you leave, your phone is unlinked; when you delete your account, your name, number and place are erased from the group and from your alerts.</li>
+<li>Unused invite codes expire after 7 days and are deleted after 30.</li>
+</ul>
+
+<h2>Your choices and rights</h2>
+<ul>
+<li>Edit your name, number and place, or hide your number, in the app: Me → Edit profile.</li>
+<li>Delete your account and data in the app: Me → Delete my account and data. Or see <a href="delete-account.html">delete your account</a>.</li>
+<li>You can ask us for a copy of your data, or to correct or delete it: <a href="mailto:privacy@amrania.com">privacy@amrania.com</a>. We answer within 30 days.</li>
+<li>Location, notifications and SMS are Android permissions you can refuse or withdraw in your phone's settings; the app keeps working, with less.</li>
+</ul>
+
+<h2>Children</h2>
+<p>ComeHelp is not meant for children under 13, and we do not knowingly collect their data.</p>
+
+<h2>Changes</h2>
+<p>If this policy changes, we update this page and the date at the top; important changes are announced in the app.</p>
+
+<hr>
+<div dir="rtl" lang="ar">
+<h2>باختصار</h2>
+<p>يجمع ComeHelp ما يحتاجه فقط لتنبيه أفراد مجموعتك: الاسم ورقم الهاتف والمكان الذي تختاره، وموقعك فقط عند إرسال نداء. لا إعلانات ولا تتبع ولا بيع للبيانات. تُحذف النداءات بعد 12 شهراً. يمكنك حذف حسابك وبياناتك من التطبيق (أنا ← حذف حسابي وبياناتي) أو بمراسلة <a href="mailto:privacy@amrania.com">privacy@amrania.com</a>.</p>
+</div>
+<div lang="fr">
+<h2>En bref</h2>
+<p>ComeHelp ne collecte que ce qu'il faut pour prévenir votre groupe : nom, téléphone, le lieu que vous indiquez, et votre position seulement quand vous envoyez une alerte. Ni publicité, ni pistage, ni revente. Les alertes sont supprimées après 12 mois. Supprimez votre compte dans l'application (Moi → Supprimer mon compte) ou écrivez à <a href="mailto:privacy@amrania.com">privacy@amrania.com</a>.</p>
+</div>
+</main>
+<footer><div class="in"><span>© 2026 Amrania Labs</span><a href="./">Home</a><a href="delete-account.html">Delete your account</a><a href="help.html">Help</a></div></footer>
+</body>
+</html>
