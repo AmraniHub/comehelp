@@ -12,40 +12,62 @@
 <nav><a href="help.html">Help</a><a href="privacy.html">Privacy</a><a href="delete-account.html">Delete account</a></nav></div></header>
 <main>
 <h1>Privacy policy</h1>
-<p>Last updated: 27 October 2026. This policy covers the ComeHelp Android app (com.comehelp.app) and its service, made by Amrania Labs ("we"). Contact: <a href="mailto:privacy@amrania.com">privacy@amrania.com</a>.</p>
+<p>Last updated: 28 October 2026 (version 1.1 of the app). This policy covers the ComeHelp Android app (com.comehelp.app) and its service, made by Amrania Labs ("we"). Contact: <a href="mailto:privacy@amrania.com">privacy@amrania.com</a>.</p>
 
 <h2>In short</h2>
 <ul>
 <li>ComeHelp exists for one thing: warning the people in your group of a danger, and showing where it is.</li>
 <li>We collect only what that needs. No advertising, no analytics, no tracking, and we never sell or share data for marketing.</li>
-<li>Your location is read only when you open the alert screen or send an alert, and is shared only with your group, inside an alert.</li>
+<li>Your location is read only when you send an alert (or choose to share it again), and your group sees it for <b>5 minutes</b>. Then it is deleted from our server and disappears from the app.</li>
+<li>The 10-second voice note you record with an alert is deleted after the same 5 minutes. A voice message to another member can be heard <b>once</b> and is deleted as it is played, or after <b>10 minutes</b> if nobody plays it.</li>
 <li>You can delete your account and data at any time, in the app or by email.</li>
 </ul>
 
 <h2>What we collect, and why</h2>
 <table>
-<tr><th>Data</th><th>Why</th><th>Who sees it</th></tr>
-<tr><td>Your name, phone number and (optionally) where you live</td><td>So the members of your group know who sends an alert, can call you, and so the admin can approve you</td><td>Your group's admins; the other members see your name and place with your alerts, and your number only if you allow it (or for the no-internet SMS backup, see below)</td></tr>
-<tr><td>Precise location (GPS), only when you send an alert</td><td>To show the place of the danger on a map</td><td>The members of your group, inside that alert</td></tr>
-<tr><td>Alerts you send (type, note, time, place), your "I'm coming" answers, and reports</td><td>So the group sees what is happening and who is coming</td><td>The members of your group; reports also reach us, to stop abuse</td></tr>
-<tr><td>A notification token for your phone and your language</td><td>To ring your phone and write alerts in your language</td><td>Our server and Google Firebase Cloud Messaging, which delivers the alarm</td></tr>
-<tr><td>Your group's member list (names and numbers), kept on your phone</td><td>So the alert can go out by SMS when there is no internet</td><td>Only your phone; SMS go through your mobile operator and are charged as normal SMS</td></tr>
+<tr><th>Data</th><th>Why</th><th>Who sees it</th><th>How long</th></tr>
+<tr><td>Your name, phone number and (optionally) where you live</td><td>So the members of your group know who sends an alert, can call you, and so the admin can approve you</td><td>Your group's admins; the other members see your name and place with your alerts, and your number only if you allow it (or for the no-internet SMS backup, see below)</td><td>While you are in a group</td></tr>
+<tr><td>Precise location (GPS), only when you send an alert or share it again</td><td>To show the place of the danger on the app's map</td><td>The members of your group, inside that alert</td><td><b>5 minutes</b>, or less if the alert is ended sooner</td></tr>
+<tr><td>A 10-second voice note recorded after you send an alert</td><td>So the group hears what is happening; their phones play it between sirens</td><td>The members of your group</td><td><b>5 minutes</b>, or less if the alert is ended sooner</td></tr>
+<tr><td>Voice messages (up to 1 minute) you send to a member or to your group</td><td>Quick, private messages between neighbours</td><td>Only the member(s) you send it to, once each</td><td>Until it is played (each listener's copy is deleted as it is handed over), or <b>10 minutes</b> if unheard</td></tr>
+<tr><td>Alerts you send (type, note, time), your "I'm coming" answers, and reports</td><td>So the group sees what is happening and who is coming</td><td>The members of your group; reports also reach us, to stop abuse</td><td>12 months (without the location or voice)</td></tr>
+<tr><td>A notification token for your phone and your language</td><td>To ring your phone and write alerts in your language</td><td>Our server and Google Firebase Cloud Messaging, which delivers the alarm</td><td>While you are in a group</td></tr>
+<tr><td>Your group's member list (names and numbers), kept on your phone</td><td>So the alert can go out by SMS when there is no internet</td><td>Only your phone; SMS go through your mobile operator and are charged as normal SMS</td><td>On your phone, until you leave</td></tr>
 </table>
-<p>The app reads incoming SMS only to recognise an alert texted by a member of your group (it looks for ComeHelp's marker and a sender in your group's list). It does not store, upload or read any other message.</p>
-<p>Your position is also shown on your own screen against map images downloaded from Esri (World Imagery); those requests carry only the map area, not your identity.</p>
+
+<h3>How the 5 minutes and the "once" are kept</h3>
+<ul>
+<li>Locations and voice recordings are never written into our main database. They are kept in a separate store, encrypted (AES-256-GCM) with a key only our server holds, each with its own expiry. A clean-up runs every minute and deletes them outright when their time is up, so nothing lasts more than about a minute past its time. The store has no backups or point-in-time restore.</li>
+<li>The alarm that reaches a phone also carries the location, so the phone can ring even on a weak connection. Google holds an undelivered alarm no longer than those 5 minutes. On the phone, the app hides the location when its time is up and removes the alarm notification.</li>
+<li>A voice message is played from the phone's memory: it is not saved on the phone. Anyone can still record a phone's sound with another device; please respect what others tell you.</li>
+<li>When the sender or an admin ends an alert, its location and voice note are deleted at once.</li>
+<li>The microphone is used only while you are recording, after you press the SOS button or the record button.</li>
+</ul>
+
+<h3>The SMS backup</h3>
+<p>With no internet, an alert is texted to the members of your group. That text includes the location as numbers, and it stays in the members' SMS inbox like any other text: we cannot delete it. The app reads incoming SMS only to recognise an alert texted by a member of your group (it looks for ComeHelp's marker and a sender in your group's list). It does not store, upload or read any other message.</p>
+
+<h3>Maps</h3>
+<p>The map is shown inside the app; it does not open another map app. Map pictures are downloaded from Esri (World Imagery, satellite) and OpenStreetMap (street map); those requests carry only the map area, not your identity. The phone keeps map pictures for up to 3 days after they were last shown, so a place seen once draws again without the internet.</p>
+
+<h3>The area briefing (when your group has it)</h3>
+<p>When the briefing is on, a member who opens the map of an alert can ask for a short spoken description of the area: nearby roads and tracks, and the nearest health centres, pharmacies, police and fire stations. To make it, our server sends the alert's location (rounded to about a metre) to OpenStreetMap's Overpass service, which returns map facts, and may send those facts to Anthropic's Claude API to word them. Neither receives your name, number or anything else about you. The briefing says only what the map holds; it knows nothing about what is happening at the scene. It is kept with the location and deleted with it after 5 minutes. The phone reads it aloud with its own voice.</p>
 
 <h2>Where the data is kept, and by whom</h2>
 <ul>
-<li><b>Cloudflare</b> (Workers and D1) hosts our server and database.</li>
+<li><b>Cloudflare</b> (Workers, D1 and Workers KV) hosts our server, our database and the store for locations and voices.</li>
 <li><b>Google Firebase Cloud Messaging</b> delivers the alarm to phones.</li>
 <li><b>Microsoft Azure Speech</b> turns the text of an alert into speech, when the read-aloud alarm is on; it receives the alert's text only.</li>
+<li><b>OpenStreetMap Overpass</b> and <b>Anthropic</b> (Claude API), only for the area briefing, as described above.</li>
 </ul>
-<p>These providers process data on our behalf and may store it outside your country. Everything is sent over encrypted connections (HTTPS). Each phone holds a private key; our server keeps only a hash of it.</p>
+<p>These providers process data on our behalf and may store it outside your country. Everything is sent over encrypted connections (HTTPS). Each phone holds a private key; our server keeps only a hash of it. Our main database (alerts, members, who may hear which message) can be restored by its host for up to 7 days after a change, for disaster recovery; locations and voices are not in it.</p>
 
 <h2>How long we keep it</h2>
 <ul>
+<li>An alert's location, voice note and area briefing: 5 minutes (deleted at once if the alert ends sooner). The alert itself stays on record without them.</li>
+<li>Voice messages: until played, or 10 minutes.</li>
 <li>Alerts, answers and reports are deleted automatically after 12 months. The app shows only the last 24 hours.</li>
-<li>Your profile is kept while you are in a group. When you leave, your phone is unlinked; when you delete your account, your name, number and place are erased from the group and from your alerts.</li>
+<li>Your profile is kept while you are in a group. When you leave, your phone is unlinked and messages waiting for you are deleted; when you delete your account, your name, number and place are erased from the group and from your alerts, and every voice you sent is deleted.</li>
 <li>Unused invite codes expire after 7 days and are deleted after 30.</li>
 </ul>
 
@@ -54,7 +76,7 @@
 <li>Edit your name, number and place, or hide your number, in the app: Me → Edit profile.</li>
 <li>Delete your account and data in the app: Me → Delete my account and data. Or see <a href="delete-account.html">delete your account</a>.</li>
 <li>You can ask us for a copy of your data, or to correct or delete it: <a href="mailto:privacy@amrania.com">privacy@amrania.com</a>. We answer within 30 days.</li>
-<li>Location, notifications and SMS are Android permissions you can refuse or withdraw in your phone's settings; the app keeps working, with less.</li>
+<li>Location, microphone, notifications and SMS are Android permissions you can refuse or withdraw in your phone's settings; the app keeps working, with less (an alert without a voice note, for instance).</li>
 </ul>
 
 <h2>Children</h2>
@@ -66,11 +88,11 @@
 <hr>
 <div dir="rtl" lang="ar">
 <h2>باختصار</h2>
-<p>يجمع ComeHelp ما يحتاجه فقط لتنبيه أفراد مجموعتك: الاسم ورقم الهاتف والمكان الذي تختاره، وموقعك فقط عند إرسال نداء. لا إعلانات ولا تتبع ولا بيع للبيانات. تُحذف النداءات بعد 12 شهراً. يمكنك حذف حسابك وبياناتك من التطبيق (أنا ← حذف حسابي وبياناتي) أو بمراسلة <a href="mailto:privacy@amrania.com">privacy@amrania.com</a>.</p>
+<p>يجمع ComeHelp ما يحتاجه فقط لتنبيه أفراد مجموعتك: الاسم ورقم الهاتف والمكان الذي تختاره. موقعك يُقرأ فقط عند إرسال نداء، وتراه مجموعتك <b>5 دقائق</b> ثم يُمحى من خادمنا ويختفي من التطبيق. الرسالة الصوتية (10 ثوانٍ) مع النداء تُمحى بعد 5 دقائق كذلك. الرسالة الصوتية بين الأعضاء تُسمع <b>مرة واحدة</b> وتُمحى، أو بعد <b>10 دقائق</b> إن لم تُسمع. الخريطة داخل التطبيق. لا إعلانات ولا تتبع ولا بيع للبيانات. تُحذف النداءات (بدون الموقع والصوت) بعد 12 شهراً. يمكنك حذف حسابك وبياناتك من التطبيق (أنا ← حذف حسابي وبياناتي) أو بمراسلة <a href="mailto:privacy@amrania.com">privacy@amrania.com</a>.</p>
 </div>
 <div lang="fr">
 <h2>En bref</h2>
-<p>ComeHelp ne collecte que ce qu'il faut pour prévenir votre groupe : nom, téléphone, le lieu que vous indiquez, et votre position seulement quand vous envoyez une alerte. Ni publicité, ni pistage, ni revente. Les alertes sont supprimées après 12 mois. Supprimez votre compte dans l'application (Moi → Supprimer mon compte) ou écrivez à <a href="mailto:privacy@amrania.com">privacy@amrania.com</a>.</p>
+<p>ComeHelp ne collecte que ce qu'il faut pour prévenir votre groupe : nom, téléphone et le lieu que vous indiquez. Votre position n'est lue que lorsque vous envoyez une alerte ; votre groupe la voit <b>5 minutes</b>, puis elle est effacée de notre serveur et disparaît de l'application. Le message vocal de 10 secondes joint à l'alerte est effacé après ces 5 minutes. Un message vocal entre membres s'écoute <b>une fois</b> puis est effacé, ou après <b>10 minutes</b> s'il n'est pas écouté. La carte s'affiche dans l'application. Ni publicité, ni pistage, ni revente. Les alertes (sans position ni voix) sont supprimées après 12 mois. Supprimez votre compte dans l'application (Moi → Supprimer mon compte) ou écrivez à <a href="mailto:privacy@amrania.com">privacy@amrania.com</a>.</p>
 </div>
 </main>
 <footer><div class="in"><span>© 2026 Amrania Labs</span><a href="./">Home</a><a href="delete-account.html">Delete your account</a><a href="help.html">Help</a></div></footer>
