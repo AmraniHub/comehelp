@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Join a ComeHelp group</title>
+<meta name="description" content="You are invited to a ComeHelp group: neighbours who warn each other of danger.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="icon-512.png">
+<link rel="stylesheet" href="style.css">
+<style>
+  .code { font-size: 2.2rem; font-weight: 800; letter-spacing: .35rem; color: #1F5C3A; margin: .3rem 0 .8rem; }
+  .big { display: block; text-align: center; font-size: 1.15rem; padding: 1rem; margin: .6rem 0; }
+  .steps li { margin: .35rem 0; }
+  [dir=rtl] .steps { padding-right: 1.4rem; padding-left: 0; }
+</style>
+</head>
+<body>
+<header><div class="in"><img src="icon-512.png" alt=""><a href="./">ComeHelp</a></div></header>
+<main>
+<!-- Everything after "#" stays in this browser: the code and who invited never reach a server. -->
+<div class="card">
+  <h1 id="t-title">You are invited to a ComeHelp group</h1>
+  <p class="lead" id="t-lead">Neighbours who warn each other of danger: one alert rings every phone in the group, with the place on a map.</p>
+  <p id="t-code">Your code</p>
+  <div class="code" id="code">······</div>
+  <a class="btn big" id="open" href="#">Open in ComeHelp</a>
+  <a class="btn alt big" id="play" href="#">Get ComeHelp on Google Play</a>
+  <ol class="steps">
+    <li id="t-s1">Install ComeHelp, then open it: the code fills itself in.</li>
+    <li id="t-s2">If it asks for a code, choose "I have a code" and type the code above.</li>
+  </ol>
+  <p class="note" id="t-apk">Google Play says the app is not available? During the test phase, <a href="download/comehelp.apk">download it here</a> (Android). Xiaomi / Redmi: open the downloaded file from the Files app.</p>
+</div>
+<p class="note" id="t-911">ComeHelp does not replace emergency services: in real danger, call them first.</p>
+</main>
+<script>
+(function () {
+  var h = new URLSearchParams(location.hash.slice(1));
+  var code = (h.get("c") || "").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 6);
+  var ref = (h.get("r") || "").replace(/[^a-f0-9]/g, "").slice(0, 12);
+  var play = "https://play.google.com/store/apps/details?id=com.comehelp.app" +
+    (code ? "&referrer=" + encodeURIComponent("code=" + code + (ref ? "&r=" + ref : "")) : "");
+  // opens the app when it is installed; otherwise Chrome follows the fallback to Google Play (which passes the code on)
+  var open = "intent://join/" + code + (ref ? "?r=" + ref : "") +
+    "#Intent;scheme=comehelp;package=com.comehelp.app;S.browser_fallback_url=" + encodeURIComponent(play) + ";end";
+  document.getElementById("code").textContent = code || "—";
+  document.getElementById("open").href = code ? open : play;
+  document.getElementById("play").href = play;
+
+  var T = {
+    ar: { dir: "rtl", title: "أنت مدعو إلى مجموعة على ComeHelp", lead: "جيران ينبّه بعضهم بعضاً عند الخطر: نداء واحد يرنّ في كل هواتف المجموعة مع المكان على الخريطة.",
+      code: "رمزك", open: "افتح في ComeHelp", play: "حمّل ComeHelp من Google Play",
+      s1: "ثبّت ComeHelp ثم افتحه: يُكتب الرمز وحده.", s2: "إن طُلب منك رمز، اختر «عندي رمز» واكتب الرمز أعلاه.",
+      apk: "يقول Google Play إن التطبيق غير متاح؟ خلال مرحلة التجربة <a href=\"download/comehelp.apk\">حمّله من هنا</a> (أندرويد). شاومي / ريدمي: افتح الملف من تطبيق الملفات.",
+      e: "ComeHelp لا يعوّض خدمات الطوارئ: في الخطر الحقيقي اتصل بها أولاً." },
+    fr: { dir: "ltr", title: "Vous êtes invité dans un groupe ComeHelp", lead: "Des voisins qui se préviennent en cas de danger : une alerte fait sonner tous les téléphones du groupe, avec le lieu sur une carte.",
+      code: "Votre code", open: "Ouvrir dans ComeHelp", play: "Installer ComeHelp sur Google Play",
+      s1: "Installez ComeHelp puis ouvrez-le : le code se remplit tout seul.", s2: "S'il demande un code, choisissez « J'ai un code » et tapez le code ci-dessus.",
+      apk: "Google Play dit que l'appli n'est pas disponible ? Pendant la phase de test, <a href=\"download/comehelp.apk\">téléchargez-la ici</a> (Android). Xiaomi / Redmi : ouvrez le fichier depuis l'appli Fichiers.",
+      e: "ComeHelp ne remplace pas les services d'urgence : en cas de vrai danger, appelez-les d'abord." },
+    es: { dir: "ltr", title: "Te han invitado a un grupo de ComeHelp", lead: "Vecinos que se avisan ante un peligro: una alerta hace sonar todos los móviles del grupo, con el lugar en un mapa.",
+      code: "Tu código", open: "Abrir en ComeHelp", play: "Instalar ComeHelp en Google Play",
+      s1: "Instala ComeHelp y ábrelo: el código se rellena solo.", s2: "Si pide un código, elige «Tengo un código» y escribe el código de arriba.",
+      apk: "¿Google Play dice que la app no está disponible? Durante la fase de prueba, <a href=\"download/comehelp.apk\">descárgala aquí</a> (Android). Xiaomi / Redmi: abre el archivo desde la app Archivos.",
+      e: "ComeHelp no sustituye a los servicios de emergencia: ante un peligro real, llámalos primero." }
+  };
+  var l = T[(navigator.language || "en").slice(0, 2)];
+  if (!l) return;
+  document.documentElement.lang = (navigator.language || "en").slice(0, 2);
+  document.documentElement.dir = l.dir;
+  var set = function (id, v, html) { var e = document.getElementById(id); if (html) e.innerHTML = v; else e.textContent = v; };
+  set("t-title", l.title); set("t-lead", l.lead); set("t-code", l.code); set("open", l.open); set("play", l.play);
+  set("t-s1", l.s1); set("t-s2", l.s2); set("t-apk", l.apk, true); set("t-911", l.e);
+})();
+</script>
+</body>
+</html>
