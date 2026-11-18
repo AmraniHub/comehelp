@@ -12,7 +12,7 @@
 <nav><a href="help.html">Help</a><a href="privacy.html">Privacy</a><a href="delete-account.html">Delete account</a></nav></div></header>
 <main>
 <h1>Privacy policy</h1>
-<p>Last updated: 15 November 2026 (version 1.2.2 of the app). This policy covers the ComeHelp Android app (com.comehelp.app) and its service, made by Amrania Labs ("we"). Contact: <a href="mailto:privacy@amrania.com">privacy@amrania.com</a>.</p>
+<p>Last updated: 18 November 2026 (version 1.2.2 of the app and later). This policy covers the ComeHelp Android app (com.comehelp.app) and its service, made by Amrania Labs ("we"). Contact: <a href="mailto:privacy@amrania.com">privacy@amrania.com</a>.</p>
 
 <h2>In short</h2>
 <ul>
@@ -33,14 +33,14 @@
 <tr><td>Alerts you send (type, note, time), your "I'm coming" answers, and reports</td><td>So the group sees what is happening and who is coming</td><td>The members of your group; reports also reach us, to stop abuse</td><td>12 months (without the location or voice)</td></tr>
 <tr><td>A request to join a group: your name, place and number, and who invited you</td><td>So the group can decide who gets in. Groups can let members who know you vouch for you</td><td>The group's admins see it all; when the group lets members vouch, the members see your name and place, who invited you, and only the last 3 digits of your number. Each member's "I know them" or "I don't" is seen by the admins</td><td>While the request is open; the answers are deleted once the request is decided</td></tr>
 <tr><td>Which groups are yours, when one phone is in several (up to 5)</td><td>So one recovery code brings back all your groups on a new phone</td><td>Only our server; members of one group do not see your other groups</td><td>While you are in those groups</td></tr>
-<tr><td>A notification token for your phone and your language</td><td>To ring your phone and write alerts in your language</td><td>Our server and Google Firebase Cloud Messaging, which delivers the alarm</td><td>While you are in a group</td></tr>
+<tr><td>A notification token for your phone and your language</td><td>To ring your phone and write alerts in your language</td><td>Our server and the push-notification service that delivers the alarm</td><td>While you are in a group</td></tr>
 <tr><td>Your group's member list (names and numbers), kept on your phone</td><td>So the alert can go out by SMS when there is no internet</td><td>Only your phone; SMS go through your mobile operator and are charged as normal SMS</td><td>On your phone, until you leave</td></tr>
 </table>
 
 <h3>How the 5 minutes and the "once" are kept</h3>
 <ul>
 <li>Locations and voice recordings are never written into our main database. They are kept in a separate store, encrypted (AES-256-GCM) with a key only our server holds, each with its own expiry. A clean-up runs every minute and deletes them outright when their time is up, so nothing lasts more than about a minute past its time. The store has no backups or point-in-time restore.</li>
-<li>The alarm that reaches a phone also carries the location, so the phone can ring even on a weak connection. Google holds an undelivered alarm no longer than those 5 minutes. On the phone, the app hides the location when its time is up and removes the alarm notification.</li>
+<li>The alarm that reaches a phone also carries the location, so the phone can ring even on a weak connection. The push-notification service holds an undelivered alarm no longer than those 5 minutes. On the phone, the app hides the location when its time is up and removes the alarm notification.</li>
 <li>A voice message is played from the phone's memory: it is not saved on the phone. Anyone can still record a phone's sound with another device; please respect what others tell you.</li>
 <li>When the sender or an admin ends an alert, its location and voice note are deleted at once.</li>
 <li>The microphone is used only while you are recording, after you press the SOS button or the record button.</li>
@@ -50,17 +50,17 @@
 <p>With no internet, an alert is texted to the members of your group. That text includes the location as numbers, and it stays in the members' SMS inbox like any other text: we cannot delete it. The app only sends these alert texts. Since version 1.2.2 it does not read incoming SMS at all (earlier versions read them only to recognise an alert texted by a member of your group), and it never stores or uploads your messages.</p>
 
 <h3>Maps</h3>
-<p>The map is shown inside the app; it does not open another map app. Map pictures are downloaded from Esri (World Imagery, satellite) and OpenStreetMap (street map); those requests carry only the map area, not your identity. The phone keeps map pictures for up to 3 days after they were last shown, so a place seen once draws again without the internet.</p>
+<p>The map is shown inside the app; it does not open another map app. Map pictures (satellite and street map) are downloaded from public map services; those requests carry only the map area, not your identity. The phone keeps map pictures for up to 3 days after they were last shown, so a place seen once draws again without the internet.</p>
 
 <h3>The area briefing (when your group has it)</h3>
-<p>When the briefing is on, a member who opens the map of an alert can ask for a short spoken description of the area: nearby roads and tracks, and the nearest health centres, pharmacies, police and fire stations. To make it, our server sends the alert's location (rounded to about a metre) to OpenStreetMap's Overpass service, which returns map facts, and may send those facts to Anthropic's Claude API to word them. Neither receives your name, number or anything else about you. The briefing says only what the map holds; it knows nothing about what is happening at the scene. It is kept with the location and deleted with it after 5 minutes. The phone reads it aloud with its own voice.</p>
+<p>When the briefing is on, a member who opens the map of an alert can ask for a short spoken description of the area: nearby roads and tracks, and the nearest health centres, pharmacies, police and fire stations. To make it, our server sends the alert's location (rounded to about a metre) to a public map-data service, which returns map facts, and may send those facts to an AI language service to word them. Neither receives your name, number or anything else about you. The briefing says only what the map holds; it knows nothing about what is happening at the scene. It is kept with the location and deleted with it after 5 minutes. The phone reads it aloud with its own voice.</p>
 
 <h2>Where the data is kept, and by whom</h2>
 <ul>
-<li><b>Cloudflare</b> (Workers, D1 and Workers KV) hosts our server, our database and the store for locations and voices.</li>
-<li><b>Google Firebase Cloud Messaging</b> delivers the alarm to phones.</li>
-<li><b>Microsoft Azure Speech</b> turns the text of an alert into speech, when the read-aloud alarm is on; it receives the alert's text only.</li>
-<li><b>OpenStreetMap Overpass</b> and <b>Anthropic</b> (Claude API), only for the area briefing, as described above.</li>
+<li>A cloud hosting provider runs our server, our database and the store for locations and voices.</li>
+<li>A push-notification service delivers the alarm to phones.</li>
+<li>A text-to-speech service turns the text of an alert into speech, when the read-aloud alarm is on; it receives the alert's text only.</li>
+<li>A map-data service and an AI language service, only for the area briefing, as described above.</li>
 </ul>
 <p>These providers process data on our behalf and may store it outside your country. Everything is sent over encrypted connections (HTTPS). Each phone holds a private key; our server keeps only a hash of it. Our main database (alerts, members, who may hear which message) can be restored by its host for up to 7 days after a change, for disaster recovery; locations and voices are not in it.</p>
 
